@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.CLASS)
 @Target(value = {ElementType.METHOD})
 public @interface PermissionRationale {
-    String[] value();
+    int value();
 }
