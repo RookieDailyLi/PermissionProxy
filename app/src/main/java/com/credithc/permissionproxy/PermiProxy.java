@@ -1,11 +1,11 @@
-package com.credithc.libprocessor;
+package com.credithc.permissionproxy;
 
 /**
  * @data: 2019/9/28 0028
  * @author: liyong
  * @desc: class description
  */
-public interface PermissionProxy<T> {
+public interface PermiProxy<T> {
 	void grant(T activity, int requestCode, String[] permissions);
 
 	void deny(T activity, int requestCode, String[] permissions);

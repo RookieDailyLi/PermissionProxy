@@ -1,4 +1,4 @@
-package com.credithc.permissionproxy;
+package com.credithc.libpermissionhelper;
 
 /**
  * @data: 2019/9/28 0028

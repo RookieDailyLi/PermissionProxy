@@ -56,7 +56,7 @@ public class PermissionProcessor extends AbstractProcessor {
 		supAnnotationTypes.add(PermissionGranted.class.getCanonicalName());
 		supAnnotationTypes.add(PermissionDenied.class.getCanonicalName());
 		supAnnotationTypes.add(PermissionRationale.class.getCanonicalName());
-		return super.getSupportedAnnotationTypes();
+		return supAnnotationTypes;
 	}
 
 	@Override
@@ -68,6 +68,11 @@ public class PermissionProcessor extends AbstractProcessor {
 		handleAnnotationInfo(roundEnv, PermissionGranted.class);
 		handleAnnotationInfo(roundEnv, PermissionDenied.class);
 		handleAnnotationInfo(roundEnv, PermissionRationale.class);
+
+		for (String clsName : clsMethodMap.keySet()) {
+			MethodInfo methodInfo = clsMethodMap.get(clsName);
+			methodInfo.generateCode();
+		}
 		return true;
 	}
 
@@ -80,7 +85,7 @@ public class PermissionProcessor extends AbstractProcessor {
 				String clsName = clsElement.getQualifiedName().toString();
 				MethodInfo methodInfo = clsMethodMap.get(clsName);
 				if (methodInfo == null) {
-					methodInfo = new MethodInfo(clsElement);
+					methodInfo = new MethodInfo(elementUtil, filer, messager, clsElement);
 					clsMethodMap.put(clsName, methodInfo);
 				}
 				Annotation annotation = executableElement.getAnnotation(permissionClass);
@@ -103,12 +108,6 @@ public class PermissionProcessor extends AbstractProcessor {
 				}
 			}
 		}
-
-		for (String clsName : clsMethodMap.keySet()) {
-			MethodInfo methodInfo = clsMethodMap.get(clsName);
-			methodInfo.generateCode();
-		}
-
 	}
 
 	private boolean checkMethodValid(Element element) {

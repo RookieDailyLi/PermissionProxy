@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
 		Toast.makeText(this, "权限申请通过", Toast.LENGTH_SHORT).show();
 	}
 
-	@PermissionRationale(REQUEST_CODE_READ_CONTACTS)
+	@PermissionDenied(REQUEST_CODE_READ_CONTACTS)
 	public void onRequestPermissionDenied(String[] permissions) {
 		Toast.makeText(this, "权限申请失败", Toast.LENGTH_SHORT).show();
 	}
 
-	@PermissionDenied(REQUEST_CODE_READ_CONTACTS)
+	@PermissionRationale(REQUEST_CODE_READ_CONTACTS)
 	public void onShouldRequestPermissionRationale(String[] permissions) {
 	}
 

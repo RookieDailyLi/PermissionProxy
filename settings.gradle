@@ -1,1 +1,1 @@
-include ':app', ':libAnnotation', ':libProcessor'
+include ':app', ':libAnnotation', ':libProcessor', ':libpermissionhelper'

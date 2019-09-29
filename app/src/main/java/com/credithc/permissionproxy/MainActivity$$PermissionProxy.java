@@ -5,7 +5,7 @@ package com.credithc.permissionproxy;
  * @author: liyong
  * @desc: class description
  */
-public class MainActivity$PermissionProxy implements PermissionProxy<MainActivity> {
+public class MainActivity$$PermissionProxy implements PermiProxy<MainActivity> {
 	@Override
 	public void grant(MainActivity activity, int requestCode, String[] permissions) {
 		switch (requestCode) {
@@ -17,11 +17,19 @@ public class MainActivity$PermissionProxy implements PermissionProxy<MainActivit
 
 	@Override
 	public void deny(MainActivity activity, int requestCode, String[] permissions) {
-
+		switch (requestCode) {
+			case 100:
+				activity.onRequestPermissionDenied(permissions);
+				break;
+		}
 	}
 
 	@Override
 	public void rationale(MainActivity activity, int requestCode, String[] permissions) {
-
+		switch (requestCode) {
+			case 100:
+				activity.onShouldRequestPermissionRationale(permissions);
+				break;
+		}
 	}
 }
