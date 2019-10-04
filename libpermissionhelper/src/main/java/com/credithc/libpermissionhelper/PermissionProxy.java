@@ -6,9 +6,9 @@ package com.credithc.libpermissionhelper;
  * @desc: class description
  */
 public interface PermissionProxy<T> {
-	void grant(T activity, int requestCode, String[] permissions);
+	void grant(T activity, String[] permissions, int requestCode);
 
-	void deny(T activity, int requestCode, String[] permissions);
+	void deny(T activity, String[] permissions, int requestCode);
 
-	void rationale(T activity, int requestCode, String[] permissions);
+	void rationale(T activity, String[] permissions, int requestCode,RationaleCallBack callBack);
 }

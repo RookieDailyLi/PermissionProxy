@@ -1,5 +1,7 @@
 package com.credithc.permissionproxy;
 
+import com.credithc.libpermissionhelper.RationaleCallBack;
+
 /**
  * @data: 2019/9/28 0028
  * @author: liyong
@@ -25,10 +27,10 @@ public class MainActivity$$PermissionProxy implements PermiProxy<MainActivity> {
 	}
 
 	@Override
-	public void rationale(MainActivity activity, int requestCode, String[] permissions) {
+	public void rationale(MainActivity activity, int requestCode, String[] permissions, RationaleCallBack callBack) {
 		switch (requestCode) {
 			case 100:
-				activity.onShouldRequestPermissionRationale(permissions);
+				activity.onShouldRequestPermissionRationale(permissions,callBack);
 				break;
 		}
 	}

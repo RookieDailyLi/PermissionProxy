@@ -49,13 +49,13 @@ public class MethodInfo {
 				.addModifiers(Modifier.PUBLIC)
 				.addAnnotation(Override.class)
 				.addParameter(TypeName.get(encloseElement.asType()), "activity")
-				.addParameter(int.class, "requestCode")
 				.addParameter(String[].class, "permissions")
+				.addParameter(int.class, "requestCode")
 				.returns(void.class);
 		for (Integer code : grantedMap.keySet()) {
 			methodBuilderGrant.beginControlFlow("switch (requestCode)")
 					.addCode("case $L:\n", code)
-					.addStatement("activity." + deniedMap.get(code) + "(permissions)", grantedMap.get(code))
+					.addStatement("activity." + grantedMap.get(code) + "(permissions)")
 					.addStatement("break")
 					.endControlFlow();
 		}
@@ -64,13 +64,13 @@ public class MethodInfo {
 				.addModifiers(Modifier.PUBLIC)
 				.addAnnotation(Override.class)
 				.addParameter(TypeName.get(encloseElement.asType()), "activity")
-				.addParameter(int.class, "requestCode")
 				.addParameter(String[].class, "permissions")
+				.addParameter(int.class, "requestCode")
 				.returns(void.class);
 		for (Integer code : deniedMap.keySet()) {
 			methodBuilderDeny.beginControlFlow("switch (requestCode)")
 					.addCode("case $L:\n", code)
-					.addStatement("activity." + deniedMap.get(code) + "(permissions)", deniedMap.get(code))
+					.addStatement("activity." + deniedMap.get(code) + "(permissions)")
 					.addStatement("break")
 					.endControlFlow();
 		}
@@ -79,13 +79,14 @@ public class MethodInfo {
 				.addModifiers(Modifier.PUBLIC)
 				.addAnnotation(Override.class)
 				.addParameter(TypeName.get(encloseElement.asType()), "activity")
-				.addParameter(int.class, "requestCode")
 				.addParameter(String[].class, "permissions")
+				.addParameter(int.class, "requestCode")
+				.addParameter(TypeName.get(elementUtil.getTypeElement("com.credithc.libpermissionhelper.RationaleCallBack").asType()), "callBack")
 				.returns(void.class);
 		for (Integer code : rationaleMap.keySet()) {
 			methodBuilderRationale.beginControlFlow("switch (requestCode)")
 					.addCode("case $L:\n", code)
-					.addStatement("activity." + deniedMap.get(code) + "(permissions)", rationaleMap.get(code))
+					.addStatement("activity." + rationaleMap.get(code) + "(permissions,callBack)")
 					.addStatement("break")
 					.endControlFlow();
 		}
